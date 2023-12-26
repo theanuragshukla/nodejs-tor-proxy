@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tor Proxy Example</title>
+  </head>
+  <body>
+    <h1>Tor Proxy Example</h1>
+    <input type="text" id="url-input" />
+    <button id="submit-button">Submit</button>
+    <div id="response"></div>
+
+    <script>
+      let proxyUrl = "http://localhost:8080";
+      let urlInput = document.querySelector("#url-input");
+      let responseDiv = document.querySelector("#response");
+
+      document
+        .querySelector("#submit-button")
+        .addEventListener("click", function () {
+          fetch(
+            proxyUrl + "/fetch-url?url=" + encodeURIComponent(urlInput.value)
+          )
+            .then((res) => res.text())
+            .then((data) => {
+              responseDiv.innerHTML = data;
+            })
+            .catch((error) => {
+              responseDiv.innerHTML = error;
+            });
+        });
+    </script>
+  </body>
+</html>
